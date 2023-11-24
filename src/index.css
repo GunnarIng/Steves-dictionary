@@ -3,6 +3,11 @@
   line-height: 1.5;
   font-weight: 400;
 
+  --color-background-light: #ffffff;
+  --color-background-dark: #242424;
+  --color-text-light: rgba(0, 0, 0, 0.87);
+  --color-text-dark: rgba(255, 255, 255, 0.87);
+
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
@@ -28,6 +33,13 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--color-background-light);
+  color: var(--color-text-light);
+}
+
+body.dark-mode {
+  background-color: var(--color-background-dark);
+  color: var(--color-text-dark);
 }
 
 h1 {
