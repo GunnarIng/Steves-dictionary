@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import useFetch from '../UseFetch/UseFetch'
 
+
 function WordInputSearch({ setData }) {
   const [inputValue, setInputValue] = useState('initialWord')
   const [word, setWord] = useState('initialWord')

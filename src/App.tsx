@@ -1,11 +1,11 @@
 import './App.css'
-import React, { useState, useEffect } from 'react'
-import WordInputSearch from './components/WordInputSearch/WordInputSearch'
-import WordCard from './Components/WordCard/WordCard'
+import { useState, useEffect } from 'react'
+import WordInputSearch from './components/WordInputsearch/WordInputSearch'
+import WordCard from './components/WordCard/WordCard'
 
 function App() {
   const [data, setData] = useState(null)
-  const [darkMode, setDarkMode] = useState(false)
+  const [darkMode, setDarkMode] = useState(true)
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode)
@@ -20,6 +20,8 @@ function App() {
       <button className="dark-mode-btn" onClick={toggleDarkMode}>
         Switch to {darkMode ? 'light' : 'dark'} mode
       </button>
+      <h1>Learn a new word</h1>
+      <button onClick={() => setData(null)}>Twirl the magic wand</button>
       <WordInputSearch setData={setData} />
       {Array.isArray(data) &&
         data.map((wordData, index) => (
