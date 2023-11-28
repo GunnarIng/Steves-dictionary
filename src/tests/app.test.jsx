@@ -1,11 +1,25 @@
-import { describe, it, expect } from 'vitest';
+import { render, screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
+import { expect, test } from 'vitest'
+import App from '../App'
 
-describe('something truthy and falsy', () => {
-  it('true to be true', () => {
-    expect(true).toBe(true);
-  });
+const user = userEvent.setup()
 
-  it('false to be false', () => {
-    expect(false).toBe(false);
-  });
-});
+
+test('find Darkmode button', async () => {
+  render(<App />)
+  await waitFor(() => {
+    const btn = screen.getByRole('button', { name: 'Switch to light mode' })
+    expect(btn).toBeInTheDocument()
+  })
+})
+
+test('Test Darkmode button', async () => {
+  render(<App />)
+  const btn = screen.getByRole('button', { name: 'Switch to light mode' })
+  expect(btn).toBeInTheDocument()
+  user.click(btn)
+  await waitFor(() => {
+    expect(btn).toHaveTextContent('Switch to dark mode')
+  })
+})

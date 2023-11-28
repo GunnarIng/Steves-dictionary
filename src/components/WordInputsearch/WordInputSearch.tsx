@@ -1,35 +1,41 @@
-import React, { useState, useEffect } from 'react'
-import useFetch from '../UseFetch/UseFetch'
+import React, { useState } from 'react'
+import { WordData } from '../WordCard/types'
 
+interface WordInputSearchProps {
+  setData: React.Dispatch<React.SetStateAction<WordData[] | null>>
+}
 
-function WordInputSearch({ setData }) {
-  const [inputValue, setInputValue] = useState('initialWord')
-  const [word, setWord] = useState('initialWord')
-  const { data, loading, error } = useFetch(
-    `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
-  )
+const WordInputSearch: React.FC<WordInputSearchProps> = ({ setData }) => {
+  const [input, setInput] = useState('')
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value)
+  const fetchWordData = async () => {
+    const response = await fetch(
+      `https://api.dictionaryapi.dev/api/v2/entries/en/${input}`
+    )
+    const data = await response.json()
+
+    if (Array.isArray(data)) {
+      // Filter out duplicates
+      const uniqueData = data.filter(
+        (v, i, a) => a.findIndex((t) => t.word === v.word) === i
+      )
+      setData(uniqueData)
+    } else {
+      // Handle error
+      console.error(data)
+      setData(null)
+    }
   }
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    setWord(inputValue)
-  }
-
-  useEffect(() => {
-    setData(data)
-  }, [data, setData])
-
-  if (loading) return 'Loading...'
-  if (error) return 'Error!'
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" value={inputValue} onChange={handleInputChange} />
-      <button type="submit">Submit</button>
-    </form>
+    <div>
+      <input
+        type="text"
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      />
+      <button onClick={fetchWordData}>Search</button>
+    </div>
   )
 }
 

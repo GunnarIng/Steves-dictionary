@@ -6,6 +6,7 @@ export interface Phonetic {
   export interface Definition {
     definition: string;
     example?: string;
+    synonyms?: string[];
   }
   
   export interface Meaning {
