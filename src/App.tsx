@@ -6,6 +6,7 @@ import WordInputSearch from './components/WordInputsearch/WordInputSearch'
 
 function App() {
   const [data, setData] = useState<WordData[] | null>(null)
+  const [error, setError] = useState<string | null>(null)
   const [darkMode, setDarkMode] = useState(true)
 
   const toggleDarkMode = () => {
@@ -22,7 +23,8 @@ function App() {
         Switch to {darkMode ? 'light' : 'dark'} mode
       </button>
       <h1>Learn a new word</h1>
-      <WordInputSearch setData={setData} />
+      <WordInputSearch setData={setData} setError={setError} />
+      {error && <p>{error}</p>}
       {Array.isArray(data) &&
         data.map((wordData: WordData, index: number) => (
           <WordCard key={index} wordData={wordData} />

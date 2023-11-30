@@ -1,13 +1,13 @@
-import React from 'react';
-import { WordData } from './types';
+import React from 'react'
+import { WordData } from './types'
 
 interface WordCardProps {
-  wordData: WordData | null;
+  wordData: WordData | null
 }
 
 const WordCard: React.FC<WordCardProps> = ({ wordData }) => {
   if (!wordData) {
-    return null;
+    return null
   }
 
   return (
@@ -26,6 +26,7 @@ const WordCard: React.FC<WordCardProps> = ({ wordData }) => {
       {wordData.meanings.map((meaning, index) => (
         <div key={index}>
           <h3>{meaning.partOfSpeech}</h3>
+          <h3>Definition</h3>
           {meaning.definitions.map((definition, defIndex) => (
             <div key={defIndex}>
               <p>{definition.definition}</p>
@@ -42,8 +43,14 @@ const WordCard: React.FC<WordCardProps> = ({ wordData }) => {
           ))}
         </div>
       ))}
+      {wordData.sourceUrls &&
+        wordData.sourceUrls.map((url, urlIndex) => (
+          <a key={urlIndex} href={url}>
+            {url}
+          </a>
+        ))}
     </div>
-  );
-};
+  )
+}
 
-export default WordCard;
+export default WordCard

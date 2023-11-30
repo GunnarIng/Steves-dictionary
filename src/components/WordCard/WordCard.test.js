@@ -1,13 +1,18 @@
-import { expect, it, test, render } from 'vitest'
-import { screen } from '@testing-library/dom'
+import { render, screen, test, expect } from 'vitest'
+import { waitFor } from '@testing-library/react';
+
 import WordCard from './WordCard'
 
-test('renders WordCard component', () => {
-  render(<WordCard />)
-  const linkElement = screen.getByText("search")
-  expect(linkElement).toBeInTheDocument()
+test('renders without crashing', () => {
+  render(<WordCard wordData={null} />)
 })
 
-it('false to be false', () => {
-  expect(false).toBe(false)
-})
+test('find buttons', async () => {
+  render(<WordCard wordData={null}  />);
+  await waitFor(
+   async () => {
+      const btn = screen.getAllByRole("button", { name: "add" });
+      expect(btn).toHaveLength(4)
+    },
+  );
+});
