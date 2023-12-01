@@ -23,21 +23,12 @@
   top: 1em;
   right: 1em;
   padding: 0.5em;
-  border-radius: 50%;
   border: 1px solid transparent;
   background-color: #c03737;
   cursor: pointer;
   transition: border-color 0.25s;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {

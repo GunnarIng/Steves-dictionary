@@ -26,14 +26,14 @@ const WordCard: React.FC<WordCardProps> = ({ wordData }) => {
       {wordData.meanings.map((meaning, index) => (
         <div key={index}>
           <h3>{meaning.partOfSpeech}</h3>
-          <h3>Definition</h3>
+          <h5>Definition</h5>
           {meaning.definitions.map((definition, defIndex) => (
             <div key={defIndex}>
               <p>{definition.definition}</p>
               {definition.example && <p>Example: {definition.example}</p>}
               {definition.synonyms && definition.synonyms.length > 0 && (
                 <div>
-                  <p>Synonyms:</p>
+                  <h5>Synonyms:</h5>
                   {definition.synonyms.map((synonym, synIndex) => (
                     <p key={synIndex}>{synonym}</p>
                   ))}
@@ -41,6 +41,14 @@ const WordCard: React.FC<WordCardProps> = ({ wordData }) => {
               )}
             </div>
           ))}
+          {meaning.antonyms && meaning.antonyms.length > 0 && (
+            <div>
+              <h5>Antonyms:</h5>
+              {meaning.antonyms.map((antonym, antIndex) => (
+                <p key={antIndex}>{antonym}</p>
+              ))}
+            </div>
+          )}
         </div>
       ))}
       {wordData.sourceUrls &&
