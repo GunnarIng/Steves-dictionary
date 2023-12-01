@@ -22,8 +22,9 @@ function App() {
       <button className="dark-mode-btn" onClick={toggleDarkMode}>
         Switch to {darkMode ? 'light' : 'dark'} mode
       </button>
-      <h1>Learn a new word</h1>
+      <h1>Steves Dictionary</h1>
       <WordInputSearch setData={setData} setError={setError} />
+
       {error && <p>{error}</p>}
       {Array.isArray(data) &&
         data.map((wordData: WordData, index: number) => (
