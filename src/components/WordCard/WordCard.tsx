@@ -12,21 +12,20 @@ const WordCard: React.FC<WordCardProps> = ({ wordData }) => {
   }
 
   return (
-    <div className="word-container">
-      <div></div>
+    <div>
       <h2>{wordData.word}</h2>
       {wordData.phonetics[0] && (
-        <div className='phonetics'>
+        <div className="phonetics">
           <p>{wordData.phonetics[0].text}</p>
           {wordData.phonetics[0].audio && (
             <audio controls src={wordData.phonetics[0].audio}>
-              Your browser does not support the audio element.
+              Your browser does not support this audio element.
             </audio>
           )}
         </div>
       )}
       {wordData.meanings.map((meaning, index) => (
-        <div className='def-container' key={index}>
+        <div className="def-container" key={index}>
           <h3>{meaning.partOfSpeech}</h3>
           <h5>Definition:</h5>
           {meaning.definitions.map((definition, defIndex) => (
@@ -34,7 +33,7 @@ const WordCard: React.FC<WordCardProps> = ({ wordData }) => {
               <p>{definition.definition}</p>
               {definition.example && <p>Example: {definition.example}</p>}
               {definition.synonyms && definition.synonyms.length > 0 && (
-                <div className='synonyms'>
+                <div className="synonyms">
                   <h5>Synonyms:</h5>
                   {definition.synonyms.map((synonym, synIndex) => (
                     <p key={synIndex}>{synonym}</p>
@@ -44,7 +43,7 @@ const WordCard: React.FC<WordCardProps> = ({ wordData }) => {
             </div>
           ))}
           {meaning.antonyms && meaning.antonyms.length > 0 && (
-            <div className='antonyms'>
+            <div className="antonyms">
               <h5>Antonyms:</h5>
               {meaning.antonyms.map((antonym, antIndex) => (
                 <p key={antIndex}>{antonym}</p>

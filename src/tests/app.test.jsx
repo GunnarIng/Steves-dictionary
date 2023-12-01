@@ -59,5 +59,15 @@ test('renders WordCard with wordData as "mother" correctly', () => {
   expect(wordElements.length).toBeGreaterThan(0);
 });
 
-
-
+test('renders error message when wordData is null', async () => {
+  render (<App />);
+  const buttonElement = screen.getByRole('button', { name: 'Search' });
+  expect(buttonElement).toBeInTheDocument();
+  userEvent.click(buttonElement);
+  
+  // wait for the error message to show up
+  await waitFor(() => {
+    const errorMessage = screen.getByText(/Error/i);
+    expect(errorMessage).toBeInTheDocument();
+  });
+});
