@@ -4,6 +4,9 @@ import { rest } from 'msw'
 import { setupServer } from 'msw/node'
 import { afterAll, afterEach, beforeAll, expect, test } from 'vitest'
 import App from '../App'
+import WordCard from '../components/WordCard/WordCard'
+import mockApiData from '../tests/mockData/mockApiData.json'
+
 
 const user = userEvent.setup()
 const server = setupServer(
@@ -47,13 +50,14 @@ test('find Search and input a value', async () => {
   })
 })
 
-test('renders App and performs search', async () => {
-  const { getByRole, getByText } = render(<App />)
-  const input = getByRole('textbox')
-  const button = getByRole('button', { name: /search/i })
+test('renders WordCard with wordData as "mother" correctly', () => {
+  const wordData = mockApiData[0];
 
-  user.type(input, { target: { value: 'Troll' } })
-  user.click(button)
+  render(<WordCard wordData={wordData} />);
 
-  await waitFor(() => getByText('Troll'))
-})
+  const wordElements = screen.getAllByText(/mother/i);
+  expect(wordElements.length).toBeGreaterThan(0);
+});
+
+
+

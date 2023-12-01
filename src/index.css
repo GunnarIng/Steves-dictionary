@@ -10,7 +10,6 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -32,7 +31,6 @@ body {
   display: flex;
   place-items: center;
   min-width: 320px;
-  min-height: 100vh;
   background-color: var(--color-background-light);
   color: var(--color-text-light);
 }
@@ -47,27 +45,22 @@ h1 {
   line-height: 1.1;
 }
 
-body {
-  background-color: #111111;
-}
 button {
   margin-left: 30px;
-  transition: all 0.5s ease;
+  transition: all 0.5s ease-in-out;
   color: #fff;
   border: 3px solid white;
   font-family: 'Montserrat', sans-serif;
   text-transform: uppercase;
   text-align: center;
   line-height: 1;
-  font-size: 17px;
-  background-color: transparent;
+  font-size: 12px;
+  background-color: #242424;
   padding: 10px;
   outline: none;
   border-radius: 4px;
 }
 button:hover {
   color: #001f3f;
-  background-color: #fff;
+  background-color: #c92020;
 }
-
-

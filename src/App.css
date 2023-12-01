@@ -5,11 +5,11 @@
 
 .dark-mode-btn {
   position: absolute;
-  top: 1em;
+  top: 0.5em;
   right: 1em;
   padding: 0.5em;
   border: 1px solid transparent;
-  background-color: #c03737;
+  background-color: #000000;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -21,6 +21,7 @@
 .antonyms {
   width: 700px;
   border-bottom: 2px solid #7e7c7c;
+  padding-bottom: 5px;
 }
 
 .antonyms p {
@@ -41,3 +42,7 @@
   color: #cf9b9b;
 }
 
+.title h1 {
+  border-bottom: #7e7c7c 2px solid;
+  padding: 0;
+}

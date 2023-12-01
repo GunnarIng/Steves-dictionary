@@ -5,6 +5,7 @@ interface WordCardProps {
   wordData: WordData | null
 }
 
+// This is the card that will be used to display the word and its definitions
 const WordCard: React.FC<WordCardProps> = ({ wordData }) => {
   if (!wordData) {
     return null

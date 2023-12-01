@@ -6,23 +6,46 @@ interface WordInputSearchProps {
   setError: React.Dispatch<React.SetStateAction<string | null>>
 }
 
-const WordInputSearch: React.FC<WordInputSearchProps> = ({ setData, setError }) => {
+// This is the search bar that will be used to search for words
+const WordInputSearch: React.FC<WordInputSearchProps> = ({
+  setData,
+  setError,
+}) => {
   const [input, setInput] = useState('')
 
   const fetchWordData = async (event: React.FormEvent) => {
-    event.preventDefault();
+    event.preventDefault()
 
-    const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${input}`)
-    const data = await response.json()
+    try {
+      // Fetch data from API
+      const response = await fetch(
+        `https://api.dictionaryapi.dev/api/v2/entries/en/${input}`
+      )
 
-    if (Array.isArray(data)) {
-      // Filter out duplicates
-      const uniqueData = data.filter((v, i, a) => a.findIndex((t) => t.word === v.word) === i)
-      setData(uniqueData)
-      setError(null)
-    } else {
-      // Handle error
-      setError(data.title || 'An error occurred')
+      if (!response.ok) {
+        throw new Error(
+          `Error: ${response.status} - Word does not exist in the dictionary`
+        )
+      }
+
+      const data = await response.json()
+
+      // Handle response
+      if (Array.isArray(data)) {
+        // Filter out duplicates
+        const uniqueData = data.filter(
+          (v, i, a) => a.findIndex((t) => t.word === v.word) === i
+        )
+        setData(uniqueData)
+        setError(null)
+      } else {
+        // If the data is not an array, handle it as an error
+        setError(data.title || 'An unexpected response format')
+        setData(null)
+      }
+    } catch (error) {
+      // Handle fetch or parsing error
+      setError(error.message || 'An error occurred while fetching data')
       setData(null)
     }
   }
@@ -34,9 +57,7 @@ const WordInputSearch: React.FC<WordInputSearchProps> = ({ setData, setError }) 
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
-      <button type="submit">
-        Search
-      </button>
+      <button type="submit">Search</button>
     </form>
   )
 }

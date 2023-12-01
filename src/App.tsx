@@ -4,6 +4,7 @@ import WordCard from './components/WordCard/WordCard'
 import { WordData } from './components/WordCard/types'
 import WordInputSearch from './components/WordInputsearch/WordInputSearch'
 
+// This is the main app that will be used to search for words
 function App() {
   const [data, setData] = useState<WordData[] | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -12,7 +13,7 @@ function App() {
   const toggleDarkMode = () => {
     setDarkMode(!darkMode)
   }
-
+  // This is for the dark mode button
   useEffect(() => {
     document.body.classList.toggle('dark-mode', darkMode)
   }, [darkMode])
@@ -22,7 +23,9 @@ function App() {
       <button className="dark-mode-btn" onClick={toggleDarkMode}>
         Switch to {darkMode ? 'light' : 'dark'} mode
       </button>
-      <h1>Steves Dictionary</h1>
+      <div className="title">
+        <h1>Steves Dictionary</h1>
+      </div>
       <WordInputSearch setData={setData} setError={setError} />
 
       {error && <p>{error}</p>}
